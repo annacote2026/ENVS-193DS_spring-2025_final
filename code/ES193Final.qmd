@@ -12,8 +12,12 @@ execute:
 
 repository: https://github.com/annacote2026/ENVS-193DS_spring-2025_final
 
-```{r reading-in-packages}
+```{r set-up}
+sst <- read.csv("data/SST_update2023.csv")
 
+library(tidyverse)
+library(janitor)
+library(dplyr)
 
 ```
 
@@ -35,12 +39,28 @@ Additionally, we found a large ($/eta^2$ = effect size) difference between sourc
 
 # Problem 2. Data visualization
 
-```{r reading-in-data}
+## a.
 
-
-
+```{r cleaning-and-summarizing}
+sst_clean <- sst |> # start with the sst dataset
+  clean_names() |> 
+  mutate( # create and modify columns
+    date = ymd(date), # make sure date is not a string
+    month = factor( # make sure month is a factor
+      month(date, label = TRUE, abbr = TRUE),
+      levels = month.abb, # abbreviate months
+      ordered = TRUE # make month an ordered factor
+    ),
+    year = factor( # extract year as a factor
+      year(date), # get the year from the 'date'
+      levels = 2018:2023 # years 2018-2023 only
+    )
+  ) |> 
+  filter(!is.na(year)) |> # drop any rows outside of selected range
+  select(month, year, temp) |> # select columns of interest
+  rename(mean_monthly_sst = temp) # rename temp to be mean_monthly_sst
 
 
 ```
 
-
+filter(date %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> # filter for 2018-2023
