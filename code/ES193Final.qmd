@@ -85,27 +85,36 @@ ggplot(data = sst_clean,
            group = year)) + # group by year
   # first layer: line graph
   geom_line() +
-  labs(x = "Month",
-       y = "Mean monthly sea surface temperature (°C)",
-       color = "Year") +
+  labs(x = "Month", # label x-axis
+       y = "Mean monthly sea surface temperature (°C)", # label y-axis
+       color = "Year") + # color by year
+  # second layer: points
   geom_point() +
-  scale_color_manual(
-    values = blue_shades,
+  scale_color_manual( # choose manual color scale
+    values = blue_shades, # blue shades
     name = "Year"
   ) +
   
-  theme(legend.position = c(0.1, 0.75),
+  theme(legend.position = c(0.1, 0.75), # move legend
         panel.grid = element_blank(), # removing panel grid
-        panel.border = element_rect(color = "gray", fill = NA, linewidth = 1),
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12),
-        axis.title = element_text(size = 14),
+        panel.border = element_rect(color = "gray", fill = NA, linewidth = 1), # make panel border gray
+        legend.title = element_text(size = 12), 
+        # change legend title text size
+        legend.text = element_text(size = 12), 
+        # change legend text size
+        axis.title = element_text(size = 14), 
+        # change axis title text size
         axis.text = element_text(size = 12),
+        # change axis text size
         axis.background = element_blank(),
+        # remove axis background
         panel.background = element_rect(fill = "white"), # coloring panel background white
         plot.background = element_rect(color = "white")) # coloring plot background white)
 ```
 
+# Problem 3. Data analysis
+
+## a.
 
 
 
