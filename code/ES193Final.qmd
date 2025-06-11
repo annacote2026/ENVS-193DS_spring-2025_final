@@ -61,11 +61,16 @@ sst_clean <- sst |> # start with the sst dataset
   rename(mean_monthly_sst = temp) |> # rename temp to be mean_monthly_sst
   group_by (year, month) |> # group by year and month
   summarise(mean_monthly_sst = mean(mean_monthly_sst, na.rm = TRUE), .groups = "drop") |> # calculate mean SST for each month-year group
-  as_tibble()
+  as_tibble() # making sure it is in the tibble format
 
-slice_sample(sst_clean, n = 5)
+slice_sample(sst_clean, n = 5) # showing 5 random rows from the cleaned data set
 
-str(sst_clean)
+str(sst_clean) # showing the structure of the data set
 ```
 
-filter(date %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> # filter for 2018-2023
+## b.
+
+```{r visualizing-sst}
+
+```
+
