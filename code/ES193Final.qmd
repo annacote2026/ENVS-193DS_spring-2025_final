@@ -18,6 +18,8 @@ sst <- read.csv("data/SST_update2023.csv")
 library(tidyverse)
 library(janitor)
 library(dplyr)
+library(ggplot2)
+library(grDevices)
 
 ```
 
@@ -56,7 +58,7 @@ sst_clean <- sst |> # start with the sst dataset
       levels = 2018:2023 # years 2018-2023 only
     )
   ) |> 
-  filter(!is.na(year)) |> # drop any rows outside of selected range
+  filter(year %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> # filter out all years except these
   select(month, year, temp) |> # select columns of interest
   rename(mean_monthly_sst = temp) |> # rename temp to be mean_monthly_sst
   group_by (year, month) |> # group by year and month
@@ -71,6 +73,61 @@ str(sst_clean) # showing the structure of the data set
 ## b.
 
 ```{r visualizing-sst}
+blue_shades <- colorRampPalette(c("lightblue1", "midnightblue"))(6) # defining a custom color palette with 6 shades of blue
+
+# base layer: ggplot
+ggplot(data = sst_clean,
+       aes(x = month, # x-axis
+           y = mean_monthly_sst, # y-axis
+           color = year, # color lines by year
+           group = year)) + # group by year
+  # first layer: line graph
+  geom_line() +
+  labs(x = "Month",
+       y = "Mean monthly sea surface temperature (°C)",
+       color = "Year") +
+  geom_point() +
+  scale_color_manual(
+    values = blue_shades,
+    name = "Year"
+  ) +
+  
+  theme(legend_position = "left",
+        panel.grid = element_blank(), # removing panel grid
+        panel.background = element_rect(fill = "white"), # coloring panel background white
+        plot.background = element_rect(color = "white")) # coloring plot background white)
 
 ```
+
+# base layer: ggplot
+ggplot(data = tussocks_clean, 
+       aes(x = site, # x-axis
+           y = average_moss_cm, # y-axis
+           color = site)) + # fill geoms by site (unburned vs burned)
+  # first layer: boxplot
+  geom_boxplot(color = "darkgrey", 
+               outliers = FALSE) + # taking out outliers because they will be shown in the jitter
+  # second layer: jitter
+  geom_jitter(height = 0,
+              width = 0.1, # making sure points are jittered horizontally
+              size = 2,
+              alpha = 0.6) +
+  # set custom colors
+  scale_color_manual(values = c("firebrick4", "darkgreen")) + 
+  # minimal theme
+  theme_minimal() + 
+  # take out the legend
+  theme(legend.position = "none",
+        panel.grid = element_blank(), # removing panel grid
+        panel.background = element_rect(fill = "white"), # coloring panel background white
+        plot.background = element_rect(color = "white")) + # coloring plot background white
+  labs(x = "Site", # label x-axis
+       y = "Tussock mound height (cm)", # label y-axis
+       title = "Site vs Tussock Mound Height", # give it a title
+       subtitle = "Anna Cote") # give it a subtitle
+
+
+
+
+
 
