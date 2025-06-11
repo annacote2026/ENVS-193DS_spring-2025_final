@@ -36,9 +36,9 @@ First, I think that my co-worker should provide the F-statistic, which is the te
 
 ## c.
 
-There is a strong negative relationship between the distance from headwater (km) and annual total nitrogen load (kg/year) (Pearson's r = correlation coefficient) (p = 0.03). 
+There is a (weak/moderate/strong) (+/-) relationship between the distance from headwater (km) and annual total nitrogen load (kg/year) (Pearson's r (df)= correlation coefficient, p = 0.03, $/alpha$ = significance level). 
 
-Additionally, we found a large ($/eta^2$ = effect size) difference between sources in average nitrogen load (kg/year) (one-way ANOVA, F(numerator degrees of freedom, denominator degrees of freedom) = test statistic, p = 0.02, $/alpha$ = significance level). 
+Additionally, we found a large ($/eta^2$ = effect size) difference between sources in average nitrogen load (kg/year) (one-way ANOVA, F(numerator degrees of freedom, denominator degrees of freedom) = F-statistic, p = 0.02, $/alpha$ = significance level). 
 
 # Problem 2. Data visualization
 
@@ -118,6 +118,14 @@ ggplot(data = sst_clean,
 
 
 
+# Problem 4. Affective and exploratory visualizations
+
+## a. 
+One of the differences between the exploratory visualizations I made in Homework 2 and the affective visualization I made in Homework 3 are that the axes represent different variables. During the creation of my exploratory visualizations I was trying to determine what the most effective way to visualize my data would be, so I experimented with the variables on the axes, and when I created the affective visualization I ended up designing it completely different, with the axes instead being date versus time. Another difference between the visualizations is that the affective one shows each individual data point, whereas the exploratory visualizations show grouped variables. A similarity between all of the visualizations is that they all utilize axes to display the data, and another is that each one encorporates a categorical data component, whether it is "mood" or "genre" for the exploratory visualizations or all of the above for the affective visualization. 
+
+## b. 
+
+Shared during class!
 
 
 
