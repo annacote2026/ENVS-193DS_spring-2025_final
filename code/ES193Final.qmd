@@ -6,6 +6,7 @@ format:
   html:
     toc: true # display table of contents
 execute:
+  working-directory: project
   message: false  # make sure messages don't show up
   warning: false  # make sure warnings don't show up
 ---
@@ -13,14 +14,14 @@ execute:
 repository: https://github.com/annacote2026/ENVS-193DS_spring-2025_final
 
 ```{r set-up}
-sst <- read.csv("data/SST_update2023.csv")
+sst <- read.csv("~/github/ENVS-193DS_spring-2025_final/data/SST_update2023.csv")
 
 library(tidyverse)
 library(janitor)
 library(dplyr)
 library(ggplot2)
 library(grDevices)
-
+library(utils)
 ```
 
 # Problem 1. Research Writing
@@ -68,6 +69,7 @@ sst_clean <- sst |> # start with the sst dataset
 slice_sample(sst_clean, n = 5) # showing 5 random rows from the cleaned data set
 
 str(sst_clean) # showing the structure of the data set
+
 ```
 
 ## b.
@@ -92,39 +94,18 @@ ggplot(data = sst_clean,
     name = "Year"
   ) +
   
-  theme(legend_position = "left",
+  theme(legend.position = c(0.1, 0.75),
         panel.grid = element_blank(), # removing panel grid
+        panel.border = element_rect(color = "gray", fill = NA, linewidth = 1),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        axis.background = element_blank(),
         panel.background = element_rect(fill = "white"), # coloring panel background white
         plot.background = element_rect(color = "white")) # coloring plot background white)
-
 ```
 
-# base layer: ggplot
-ggplot(data = tussocks_clean, 
-       aes(x = site, # x-axis
-           y = average_moss_cm, # y-axis
-           color = site)) + # fill geoms by site (unburned vs burned)
-  # first layer: boxplot
-  geom_boxplot(color = "darkgrey", 
-               outliers = FALSE) + # taking out outliers because they will be shown in the jitter
-  # second layer: jitter
-  geom_jitter(height = 0,
-              width = 0.1, # making sure points are jittered horizontally
-              size = 2,
-              alpha = 0.6) +
-  # set custom colors
-  scale_color_manual(values = c("firebrick4", "darkgreen")) + 
-  # minimal theme
-  theme_minimal() + 
-  # take out the legend
-  theme(legend.position = "none",
-        panel.grid = element_blank(), # removing panel grid
-        panel.background = element_rect(fill = "white"), # coloring panel background white
-        plot.background = element_rect(color = "white")) + # coloring plot background white
-  labs(x = "Site", # label x-axis
-       y = "Tussock mound height (cm)", # label y-axis
-       title = "Site vs Tussock Mound Height", # give it a title
-       subtitle = "Anna Cote") # give it a subtitle
 
 
 
