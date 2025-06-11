@@ -1,0 +1,46 @@
+---
+title: "ENVS 193DS Final"
+author: "Anna Cote"
+date: "2025-06-10"
+format: 
+  html:
+    toc: true # display table of contents
+execute:
+  message: false  # make sure messages don't show up
+  warning: false  # make sure warnings don't show up
+---
+
+repository: https://github.com/annacote2026/ENVS-193DS_spring-2025_final
+
+```{r reading-in-packages}
+
+
+```
+
+# Problem 1. Research Writing
+
+## a. 
+
+In part 1 they used a Person's r correlation to determine the strength of the relationship between distance from headwater (km) and annual total nitrogen load (kg/year), assuming that these variables exhibit a linear relationship. In part 2 they used a one-way ANOVA test, which helps determine if there is a statistically significant difference between the group means, which in this case is the average nitrogen load (kg/year) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands).
+
+## b. 
+
+First, I think that my co-worker should provide the F-statistic, which is the test-statistic for an ANOVA, and would give context for the reasoning behind rejecting the null hypothesis, since it compares the between group variance (signal) to the within group variance (noise). In this situation, the F-statistic would be a numerical representation of the difference in average nitrogen load (kg/year) between sources, which would support their rejection of the null hypothesis if it is large. Another detail that should be included is the effect size for the ANOVA ($/eta^2$), which tells you how much the grouping variable explains the response variable. In this case, the effect size's value would communicate how "large" the difference between sources in average nitrogen load (kg/year) is.
+
+## c.
+
+There is a strong negative relationship between the distance from headwater (km) and annual total nitrogen load (kg/year) (Pearson's r = correlation coefficient) (p = 0.03). 
+
+Additionally, we found a large ($/eta^2$ = effect size) difference between sources in average nitrogen load (kg/year) (one-way ANOVA, F(numerator degrees of freedom, denominator degrees of freedom) = test statistic, p = 0.02, $/alpha$ = significance level). 
+
+# Problem 2. Data visualization
+
+```{r reading-in-data}
+
+
+
+
+
+```
+
+
