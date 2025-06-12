@@ -14,9 +14,9 @@ execute:
 repository: https://github.com/annacote2026/ENVS-193DS_spring-2025_final
 
 ```{r set-up}
-sst <- read.csv("~/github/ENVS-193DS_spring-2025_final/data/SST_update2023.csv")
+sst <- read.csv("~/github/ENVS-193DS_spring-2025_final/data/SST_update2023.csv") # reading in sea surface temp data and storing it as sst
 
-nest_boxes <- read.csv("~/github/ENVS-193DS_spring-2025_final/data/occdist.csv")
+nest_boxes <- read.csv("~/github/ENVS-193DS_spring-2025_final/data/occdist.csv") # reading in nest box data and storing it as nest_boxes
 
 library(tidyverse)
 library(janitor)
@@ -147,7 +147,8 @@ The two years that are compared are defined by the mast tree flowering event tha
 
 ## e.
 ```{r running-models}
-#| echo: false
+#| echo: true
+#| results: "hide"
 
 # model 0: null model
 model0 <- glm(
@@ -271,7 +272,6 @@ print(predictions)
 ## k.
 
 Figure 1 shows that the predicted probability of Swift Parrot nest box occupancy is highest near the forest edge (0 m) and decreases as distance from the edge increases. According to the model predictions, nest box occupancy at 0 m is substantially higher during both seasons compared to occupancy at 900 m. For example, during 2019 the probability of occupancy at the edge (0 m) is five times what it is at 900 m (0.30 versus 0.06). This trend suggests a strong preference for nesting near forest edges, likely due their nomadic nature, and therefor their lack of tendency to settle deep in the forest. Additionally, Swift Parrots may favor edge habitats because they offer the most available nesting habitat with reduced competition, as Tree Martins have been observed to nest more frequently deeper into the forest and further from the edge. Edge habitats overall likely provide a balance of open space for flight and nearby vegetation for protection and food, which enhances nesting success.
-
 
 
 
