@@ -21,4 +21,4 @@ This README also exists in the root directory as 'README.md'.
 
 ## Rendered output
 
-The rendered output for the code in this repository is here.
+The rendered output for the code in this repository is [here](https://annacote2026.github.io/ENVS-193DS_spring-2025_final/code/ES193Final.html).
