@@ -24,6 +24,8 @@ library(dplyr)
 library(ggplot2)
 library(grDevices)
 library(utils)
+library(DHARMa)
+library(MuMIn)
 ```
 
 # Problem 1. Research Writing
@@ -141,7 +143,39 @@ The two years that are compared are defined by the mast tree flowering event tha
 | 2            |   X  |                |    Season    |   
 | 3            |    |         X        |    Distance to Forest Edge    |    
 
+## e.
+```{r running-models}
+#| echo: false
+# model 0: null model
+model0 <- lm(
+  sp ~ 1, # formula
+  data = nest_boxes_clean # data frame
+)
 
+# model 1: all predictors
+model1 <- lm(
+  sp ~ season + edge_distance, # formula
+  data = nest_boxes_clean # data frame
+)
+
+# model 2: SLA and water treatment
+model2 <- lm(
+  sp ~ season,
+  data = nest_boxes_clean
+)
+
+# model 3: SLA and species
+model3 <- lm(
+  sp ~ edge_distance,
+  data = nest_boxes_clean
+)
+```
+
+## f.
+
+```{r model-diagnostics}
+
+```
 
 
 # Problem 4. Affective and exploratory visualizations
