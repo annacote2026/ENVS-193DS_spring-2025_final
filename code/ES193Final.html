@@ -124,11 +124,14 @@ window.Quarto = {
   <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
   <ul class="collapse">
   <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
+  <li><a href="#b.-2" id="toc-b.-2" class="nav-link" data-scroll-target="#b.-2">b.</a></li>
+  <li><a href="#c.-1" id="toc-c.-1" class="nav-link" data-scroll-target="#c.-1">c.</a></li>
+  <li><a href="#d." id="toc-d." class="nav-link" data-scroll-target="#d.">d.</a></li>
   </ul></li>
   <li><a href="#problem-4.-affective-and-exploratory-visualizations" id="toc-problem-4.-affective-and-exploratory-visualizations" class="nav-link" data-scroll-target="#problem-4.-affective-and-exploratory-visualizations">Problem 4. Affective and exploratory visualizations</a>
   <ul class="collapse">
   <li><a href="#a.-3" id="toc-a.-3" class="nav-link" data-scroll-target="#a.-3">a.</a></li>
-  <li><a href="#b.-2" id="toc-b.-2" class="nav-link" data-scroll-target="#b.-2">b.</a></li>
+  <li><a href="#b.-3" id="toc-b.-3" class="nav-link" data-scroll-target="#b.-3">b.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -170,12 +173,14 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/github/ENVS-193DS_spring-2025_final/data/SST_update2023.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(utils)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>nest_boxes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/github/ENVS-193DS_spring-2025_final/data/occdist.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(utils)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="problem-1.-research-writing" class="level1">
 <h1>Problem 1. Research Writing</h1>
@@ -224,11 +229,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   year  month mean_monthly_sst
   &lt;fct&gt; &lt;ord&gt;            &lt;dbl&gt;
-1 2019  Mar               13.6
-2 2019  Jan               14.7
-3 2018  Oct               18.5
-4 2023  Apr               12.4
-5 2023  Feb               13.0</code></pre>
+1 2021  Apr               13.1
+2 2023  Feb               13.0
+3 2018  Aug               19.6
+4 2021  Feb               13.1
+5 2019  May               14.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sst_clean) <span class="co"># showing the structure of the data set</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -273,10 +278,8 @@ window.Quarto = {
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change axis title text size</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change axis text size</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># remove axis background</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), <span class="co"># coloring panel background white</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>)) <span class="co"># coloring plot background white)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), <span class="co"># coloring panel background white</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>)) <span class="co"># coloring plot background white)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -291,6 +294,67 @@ window.Quarto = {
 <h1>Problem 3. Data analysis</h1>
 <section id="a.-2" class="level2">
 <h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+<p>In this study, the 1s and 0s are distinguishing the different inhabitants of the nest boxes. The options are Swift parrot, Tree martin, Common starling, and empty, and each is denoted with a 1 in its respective column on the data sheet.</p>
+</section>
+<section id="b.-2" class="level2">
+<h2 class="anchored" data-anchor-id="b.-2">b.</h2>
+<p>The Swift Parrots are very selective about where they nest, and have been observed to not return to a nesting site after using it once, unlike the Common Starlings and Tree Martins, who are quite adaptive and abundant in the area. Since this study is determining the effectiveness of deploying permanent nest boxes to restore the critically endangered Swift Parrot population, it is important to understand that Tree Martins are subordinate nest competitors to both Common Starlings and Swift Parrots, and that the competitive interaction between Swift Parrots and Common Starlings is not well understood aside from some anecdotal observations.</p>
+</section>
+<section id="c.-1" class="level2">
+<h2 class="anchored" data-anchor-id="c.-1">c.</h2>
+<p>The two years that are compared are defined by the mast tree flowering event that occurred in the breeding habitat, triggering Swift Parrot nesting. The difference between the two breeding seasons is that the first year (2016) acted as a general trial run of the nest boxes, but since they were left in the same spots after their initial deployment, the second year (2019) acted more as a test for the efficacy of the permanent deployment option, because they had already been nested in by the parrots during the first year.</p>
+</section>
+<section id="d." class="level2">
+<h2 class="anchored" data-anchor-id="d.">d.</h2>
+<p>4 models total:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Model Number</th>
+<th style="text-align: center;">Season</th>
+<th style="text-align: center;">Distance to Forest Edge</th>
+<th style="text-align: center;">Model Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">no predictors (null model)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">all predictors (saturated model)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Season</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">Distance to Forest Edge</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="problem-4.-affective-and-exploratory-visualizations" class="level1">
@@ -302,8 +366,8 @@ window.Quarto = {
 <p>In general, the amount that I listened to specific genres as well as the count of each mood are fairly even across the board, which you can see in my affective visualization and in my exploratory visualizations. That being said, it is difficult to pick up on any concrete patterns in my exploratory visualizations because I made them before I had a substantial amount of data recorded. Additionally, I think that the way I chose to depict the affective visualization made it challenging to see patterns in my data without counting the occurrences of categorical variables individually.</p>
 <p>The main feedback I received during week 9 in workshop was that it was difficult to tell what time and date corresponded to each individual data point, and one of my peers suggested changing the format to a calendar. I ended up implementing this suggestion, and labeled each day on the calendar with the date, as well as the time for each data point. I think that in the end, this made the graphic easier to interpret overall.</p>
 </section>
-<section id="b.-2" class="level2">
-<h2 class="anchored" data-anchor-id="b.-2">b.</h2>
+<section id="b.-3" class="level2">
+<h2 class="anchored" data-anchor-id="b.-3">b.</h2>
 <p>Shared during class!</p>
 </section>
 </section>

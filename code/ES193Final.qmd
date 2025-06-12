@@ -123,13 +123,24 @@ nest_boxes_clean <- nest_boxes |>
 
 
 ## a. 
-In this study, the 1s and 0s are distinguishing the different inhabitants of the nest boxes. The options are swift parrot, tree martin, common starling, and empty.
+In this study, the 1s and 0s are distinguishing the different inhabitants of the nest boxes. The options are Swift parrot, Tree martin, Common starling, and empty, and each is denoted with a 1 in its respective column on the data sheet.
 
 ## b.
 The Swift Parrots are very selective about where they nest, and have been observed to not return to a nesting site after using it once, unlike the Common Starlings and Tree Martins, who are quite adaptive and abundant in the area. Since this study is determining the effectiveness of deploying permanent nest boxes to restore the critically endangered Swift Parrot population, it is important to understand that Tree Martins are subordinate nest competitors to both Common Starlings and Swift Parrots, and that the competitive interaction between Swift Parrots and Common Starlings is not well understood aside from some anecdotal observations. 
 
 ## c.
 The two years that are compared are defined by the mast tree flowering event that occurred in the breeding habitat, triggering Swift Parrot nesting. The difference between the two breeding seasons is that the first year (2016) acted as a general trial run of the nest boxes, but since they were left in the same spots after their initial deployment, the second year (2019) acted more as a test for the efficacy of the permanent deployment option, because they had already been nested in by the parrots during the first year.
+
+## d.
+4 models total:
+
+| Model Number | Season | Distance to Forest Edge | Model Description              |  
+|:------------:|:---:|:---------------:|:-------:|-----------------------------|  
+| 0            |     |                 |    no predictors (null model)    |
+| 1            |  X  |       X         |    all predictors (saturated model)    | 
+| 2            |   X  |                |    Season    |   
+| 3            |    |         X        |    Distance to Forest Edge    |    
+
 
 
 
