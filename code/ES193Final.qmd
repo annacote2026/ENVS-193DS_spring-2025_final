@@ -26,6 +26,7 @@ library(grDevices)
 library(utils)
 library(DHARMa)
 library(MuMIn)
+library(nnet)
 ```
 
 # Problem 1. Research Writing
@@ -146,27 +147,32 @@ The two years that are compared are defined by the mast tree flowering event tha
 ## e.
 ```{r running-models}
 #| echo: false
+
 # model 0: null model
-model0 <- lm(
+model0 <- glm(
   sp ~ 1, # formula
+  family = binomial,
   data = nest_boxes_clean # data frame
 )
 
 # model 1: all predictors
-model1 <- lm(
+model1 <- glm(
   sp ~ season + edge_distance, # formula
+  family = binomial,
   data = nest_boxes_clean # data frame
 )
 
-# model 2: SLA and water treatment
-model2 <- lm(
+# model 2: season
+model2 <- glm(
   sp ~ season,
+  family = binomial,
   data = nest_boxes_clean
 )
 
-# model 3: SLA and species
-model3 <- lm(
+# model 3: edge distance
+model3 <- glm(
   sp ~ edge_distance,
+  family = binomial,
   data = nest_boxes_clean
 )
 ```
@@ -177,9 +183,19 @@ model3 <- lm(
 par(mfrow = c(2,2))
 plot(model1)
 plot(model2)
-plot(model3) # residuals look ok for best model
+plot(model3) # residuals look ok for 1 and 3
 ```
 
+## g.
+
+```{r selecting-model}
+AICc(model1, # best model: season + distance to forest edge
+     model2,
+     model3,
+     model0) |> 
+  # arranging output in descending order of AIC
+  arrange(AICc)
+```
 
 # Problem 4. Affective and exploratory visualizations
 
