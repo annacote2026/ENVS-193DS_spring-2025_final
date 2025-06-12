@@ -257,6 +257,20 @@ ggplot() + # create graph
 
 Figure 1. Predicted probabilities of nest box occupancy by Swift Parrots as an additive effect of distance to the forest edge, and the year of the study. 2016 represents the nesting season when the nest boxes were newly deployed, while for 2019's breeding season, the nest boxes had been in place for three years. Lines represent predictions from a generalized linear model with a binomial error distribution. Shaded areas around each line indicate 95% confidence intervals for the predictions, and jittered points display raw observational data. Data: (Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb)
 
+## j.
+
+```{r predict}
+predictions <- ggpredict(
+  model1,   # model object
+  terms = c("edge_distance [0,900]", "season")  # specifying edge distances
+)
+
+print(predictions)
+```
+
+## k.
+
+Figure 1 shows that the predicted probability of Swift Parrot nest box occupancy is highest near the forest edge (0 m) and decreases as distance from the edge increases. According to the model predictions, nest box occupancy at 0 m is substantially higher during both seasons compared to occupancy at 900 m. For example, during 2019 the probability of occupancy at the edge (0 m) is five times what it is at 900 m (0.30 versus 0.06). This trend suggests a strong preference for nesting near forest edges, likely due their nomadic nature, and therefor their lack of tendency to settle deep in the forest. Additionally, Swift Parrots may favor edge habitats because they offer the most available nesting habitat with reduced competition, as Tree Martins have been observed to nest more frequently deeper into the forest and further from the edge. Edge habitats overall likely provide a balance of open space for flight and nearby vegetation for protection and food, which enhances nesting success.
 
 
 
