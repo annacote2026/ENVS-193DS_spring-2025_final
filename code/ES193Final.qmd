@@ -217,6 +217,9 @@ model1_predictions <- ggpredict(
          season = group,
          predicted = predicted)
 
+model1_predictions$season <- as.factor(model1_predictions$season)
+nest_boxes_clean$season <- as.factor(nest_boxes_clean$season)
+
 ggplot() + # create graph
   geom_line(data = model1_predictions, # add prediction lines
             aes(x = edge_distance, # set variables
@@ -224,7 +227,6 @@ ggplot() + # create graph
                 color = season),
             size = 1.0) + # set line width
   
-
   geom_ribbon(data = model1_predictions, # add 95% confidence interval
               aes(x = edge_distance, # x is distance to forest edge
                   ymin = conf.low, 
@@ -232,11 +234,15 @@ ggplot() + # create graph
                   fill = season), # fill by season
               alpha = 0.3, # 30% transparency
               color = NA) +
+  geom_jitter(data = nest_boxes_clean,
+              aes(x = edge_distance, y = sp, color = season),
+              width = 0.2, height = 0.02, alpha = 0.5, shape = 21) +
   
-  labs(x = "Distance to Forest Edge (m)", # label axes and legend
-       y = "Probability of Nest Box Occupancy",
-       color = "Season",
-       fill = "Season") +
+  labs(title = "Nest box occupancy by Swift Parrot",
+       x = "Distance to forest edge (m)", # label axes and legend
+       y = "Probability of nest box occupancy",
+       color = "season",
+       fill = "season") +
   
   theme_minimal() + # make clean theme
   theme(
@@ -247,44 +253,12 @@ ggplot() + # create graph
   scale_fill_brewer(palette = "Set2") # change color palette
 ```
 
-model1_predictions <- ggpredict(
-  model1, # model object
-  terms = c("edge_distance", "season") # predictors
-) |> 
-  # renaming the columns
-  rename(edge_distance = x,
-         season = group,
-         predicted = predicted)
+## i.
 
-#| fig-width: 12
-#| fig-height: 4
+Figure 1. Predicted probabilities of nest box occupancy by Swift Parrots as an additive effect of distance to the forest edge, and the year of the study. 2016 represents the nesting season when the nest boxes were newly deployed, while for 2019's breeding season, the nest boxes had been in place for three years. Lines represent predictions from a generalized linear model with a binomial error distribution. Shaded areas around each line indicate 95% confidence intervals for the predictions, and jittered points display raw observational data. Data: (Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb)
 
-# base layer: ggplot
-# using the drought_exp_clean object
-ggplot(data = model1_predictions,
-       aes(x = edge_distance,
-           y = predicted,
-           color = season)) +
-  # first layer: jitter showing individual observations
-  geom_jitter(width = 0.1,
-              height = 0,
-              shape = 21,
-              alpha = 0.6) +
-  geom_line(size = 1.2) 
-   
-  
-  # manually setting colors
-  scale_color_manual(values = c("Well watered" = ww_col,
-                                "Drought stressed" = ds_col)) +
-  # wrapping x-axis labels
-  scale_x_discrete(labels = label_wrap(10)) +
-  # creating different panels for each species
-  facet_wrap(~species_name, nrow = 1) +
-  # labelling x- and y-axis
-  labs(x = "Water treatment",
-       y = "Total mass (g)") +
-  # taking out the legend
-  theme(legend.position = "none")
+
+
 
 
 
