@@ -121,6 +121,15 @@ window.Quarto = {
   <li><a href="#a.-1" id="toc-a.-1" class="nav-link" data-scroll-target="#a.-1">a.</a></li>
   <li><a href="#b.-1" id="toc-b.-1" class="nav-link" data-scroll-target="#b.-1">b.</a></li>
   </ul></li>
+  <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
+  <ul class="collapse">
+  <li><a href="#a.-2" id="toc-a.-2" class="nav-link" data-scroll-target="#a.-2">a.</a></li>
+  </ul></li>
+  <li><a href="#problem-4.-affective-and-exploratory-visualizations" id="toc-problem-4.-affective-and-exploratory-visualizations" class="nav-link" data-scroll-target="#problem-4.-affective-and-exploratory-visualizations">Problem 4. Affective and exploratory visualizations</a>
+  <ul class="collapse">
+  <li><a href="#a.-3" id="toc-a.-3" class="nav-link" data-scroll-target="#a.-3">a.</a></li>
+  <li><a href="#b.-2" id="toc-b.-2" class="nav-link" data-scroll-target="#b.-2">b.</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -180,8 +189,8 @@ window.Quarto = {
 </section>
 <section id="c." class="level2">
 <h2 class="anchored" data-anchor-id="c.">c.</h2>
-<p>There is a strong negative relationship between the distance from headwater (km) and annual total nitrogen load (kg/year) (Pearson’s r = correlation coefficient) (p = 0.03).</p>
-<p>Additionally, we found a large (<span class="math inline">\(/eta^2\)</span> = effect size) difference between sources in average nitrogen load (kg/year) (one-way ANOVA, F(numerator degrees of freedom, denominator degrees of freedom) = test statistic, p = 0.02, <span class="math inline">\(/alpha\)</span> = significance level).</p>
+<p>There is a (weak/moderate/strong) (+/-) relationship between the distance from headwater (km) and annual total nitrogen load (kg/year) (Pearson’s r (df)= correlation coefficient, p = 0.03, <span class="math inline">\(/alpha\)</span> = significance level).</p>
+<p>Additionally, we found a large (<span class="math inline">\(/eta^2\)</span> = effect size) difference between sources in average nitrogen load (kg/year) (one-way ANOVA, F(numerator degrees of freedom, denominator degrees of freedom) = F-statistic, p = 0.02, <span class="math inline">\(/alpha\)</span> = significance level).</p>
 </section>
 </section>
 <section id="problem-2.-data-visualization" class="level1">
@@ -215,11 +224,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   year  month mean_monthly_sst
   &lt;fct&gt; &lt;ord&gt;            &lt;dbl&gt;
-1 2021  Nov               15.8
-2 2021  Feb               13.1
-3 2019  Dec               15.0
-4 2022  Jul               17.0
-5 2018  Mar               13.5</code></pre>
+1 2019  Mar               13.6
+2 2019  Jan               14.7
+3 2018  Oct               18.5
+4 2023  Apr               12.4
+5 2023  Feb               13.0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sst_clean) <span class="co"># showing the structure of the data set</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -243,25 +252,31 @@ window.Quarto = {
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> year)) <span class="sc">+</span> <span class="co"># group by year</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first layer: line graph</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean monthly sea surface temperature (°C)"</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Year"</span>) <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> blue_shades,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Year"</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.75</span>),</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="co"># removing panel grid</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="dv">1</span>),</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), <span class="co"># coloring panel background white</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>)) <span class="co"># coloring plot background white)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Month"</span>, <span class="co"># label x-axis</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean monthly sea surface temperature (°C)"</span>, <span class="co"># label y-axis</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Year"</span>) <span class="sc">+</span> <span class="co"># color by year</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># second layer: points</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>( <span class="co"># choose manual color scale</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> blue_shades, <span class="co"># blue shades</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Year"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.75</span>), <span class="co"># move legend</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="co"># removing panel grid</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="dv">1</span>), <span class="co"># make panel border gray</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change legend title text size</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change legend text size</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>), </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change axis title text size</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># change axis text size</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># remove axis background</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>), <span class="co"># coloring panel background white</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>)) <span class="co"># coloring plot background white)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -270,6 +285,26 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="problem-3.-data-analysis" class="level1">
+<h1>Problem 3. Data analysis</h1>
+<section id="a.-2" class="level2">
+<h2 class="anchored" data-anchor-id="a.-2">a.</h2>
+</section>
+</section>
+<section id="problem-4.-affective-and-exploratory-visualizations" class="level1">
+<h1>Problem 4. Affective and exploratory visualizations</h1>
+<section id="a.-3" class="level2">
+<h2 class="anchored" data-anchor-id="a.-3">a.</h2>
+<p>One of the differences between the exploratory visualizations I made in Homework 2 and the affective visualization I made in Homework 3 are that the axes represent different variables. During the creation of my exploratory visualizations I was trying to determine what the most effective way to visualize my data would be, so I experimented with the variables on the axes, and when I created the affective visualization I ended up designing it completely different, with the axes instead being date versus time. Another difference between the visualizations is that the affective one shows each individual data point, whereas the exploratory visualizations show grouped variables.</p>
+<p>A similarity between all of the visualizations is that they all utilize axes to display the data, and another is that each one encorporates a categorical data component, whether it is “mood” or “genre” for the exploratory visualizations or all of the above for the affective visualization.</p>
+<p>In general, the amount that I listened to specific genres as well as the count of each mood are fairly even across the board, which you can see in my affective visualization and in my exploratory visualizations. That being said, it is difficult to pick up on any concrete patterns in my exploratory visualizations because I made them before I had a substantial amount of data recorded. Additionally, I think that the way I chose to depict the affective visualization made it challenging to see patterns in my data without counting the occurrences of categorical variables individually.</p>
+<p>The main feedback I received during week 9 in workshop was that it was difficult to tell what time and date corresponded to each individual data point, and one of my peers suggested changing the format to a calendar. I ended up implementing this suggestion, and labeled each day on the calendar with the date, as well as the time for each data point. I think that in the end, this made the graphic easier to interpret overall.</p>
+</section>
+<section id="b.-2" class="level2">
+<h2 class="anchored" data-anchor-id="b.-2">b.</h2>
+<p>Shared during class!</p>
 </section>
 </section>
 
