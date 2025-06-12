@@ -181,10 +181,17 @@ model3 <- glm(
 ## f.
 
 ```{r model-diagnostics}
+res0 <- simulateResiduals(model0) # simulate residuals
+res1 <- simulateResiduals(model1)
+res2 <- simulateResiduals(model2)
+res3 <- simulateResiduals(model3)
+
 par(mfrow = c(2,2))
-plot(model1)
-plot(model2)
-plot(model3) # residuals look ok for 1 and 3
+plot(res0)
+plot(res1)
+plot(res2)
+plot(res3) 
+# residuals look decent for all
 ```
 
 ## g.
@@ -197,10 +204,14 @@ AICc(model1, # best model: season + distance to forest edge
   # arranging output in descending order of AIC
   arrange(AICc)
 ```
+The best model, as determined by Akaike's Information Criterion (AICc), was the one that included both season and distance to forest edge as predictors of occupancy of nest boxes by Swift Parrots.This model had the lowest AICc value (226.31), indicating the strongest support among the candidate models.
 
 ## h. 
 
 ```{r visualizing-predictions}
+
+```
+
 model1_predictions <- ggpredict(
   model1, # model object
   terms = c("edge_distance", "season") # predictors
@@ -222,7 +233,9 @@ ggplot(data = model1_predictions,
   geom_jitter(width = 0.1,
               height = 0,
               shape = 21,
-              alpha = 0.6) 
+              alpha = 0.6) +
+  geom_line(size = 1.2) 
+   
   
   # manually setting colors
   scale_color_manual(values = c("Well watered" = ww_col,
@@ -236,9 +249,6 @@ ggplot(data = model1_predictions,
        y = "Total mass (g)") +
   # taking out the legend
   theme(legend.position = "none")
-```
-
-
 
 
 
