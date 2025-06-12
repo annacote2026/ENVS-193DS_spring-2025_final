@@ -174,7 +174,10 @@ model3 <- lm(
 ## f.
 
 ```{r model-diagnostics}
-
+par(mfrow = c(2,2))
+plot(model1)
+plot(model2)
+plot(model3) # residuals look ok for best model
 ```
 
 
